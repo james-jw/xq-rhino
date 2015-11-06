@@ -4,7 +4,7 @@ Javascript CommonJs implementation for XQuery 3.1 leveraging the Rhino Javascrip
 
 ## Why?
 
-Use javascript in your XQuery scripts and services or test your new javascript npm module with XQuery! Additionally, with the 
+Use javascript in XQuery scripts and services or test new javascript npm module with XQuery! Additionally, with the 
 prevlelance of node.js in resent years. Algorithms and libraries exist in the `node` space that would be a
 shame to not use in your next XQuery project.
 
@@ -64,7 +64,7 @@ return
 ```
 
 Additionlly, script objects and XQuery objects are interchangable, including
-function items. For example, you may pass XQuery functions into script functions and vice versa.
+function items. For example, its possible to pass XQuery functions into javascript functions and vice versa:
 
 ```xquery
 let $jsFunc := js:new('function (callback) { callback("Hey XQuery!"); }')
@@ -75,11 +75,10 @@ return
 This goes the same for maps and arrays.
 
 ### Methods
-The module provides a few helper methods for interacting with javascript objects. The 
-most powerful is `new`.
+The module provides a few helper methods for interacting with javascript objects. 
 
 #### new
-New allows for contstruction and execution of any arbitray javascript code. For example
+New allows for contstruction and execution of any arbitray javascript code. For example,
 to create an array and then query it with the new XQuery `?` operator you could do the 
 following:
 
@@ -90,10 +89,9 @@ return
 ```
 
 #### require
-The require method implements the common js pattern as used in `node.js`. 
+The require method implements the CommonJS pattern as used with Node.js. 
 
-For example, if you wanted to load `mustache` and your node modules 
-are stored at `/home/user/modules` you would do the following: 
+For example, if we wanted to load `mustache` with the node modules stored at `/home/user/modules` we would do the following: 
 
 ```xquery
 let $require := js:require('/home/user/modules/')
@@ -103,7 +101,7 @@ return
 ```
 
 #### keys
-Returns all the keys found in a script object. Operates exactly like `map:keys`. For example, the 
+The `keys` method returns all the keys found in a script object. Operates exactly like `map:keys`. For example, the 
 following would return: `first` `last`
 
 ```xquery
