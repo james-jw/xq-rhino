@@ -1,12 +1,12 @@
 # xq-rhino
 
-Javascript and CommonJs implementation for XQuery 3.1. This version of the library leverages the Rhino Javascript library.
+Javascript CommonJs implementation for XQuery 3.1 leveraging the Rhino Javascript library.
 
 ## Why?
 
-Leverage javascript in your XQuery scripts and services or test your new javascript npm module with XQuery! Additionally with the 
-prevlelance of node.js in resent years. Many algorithms and libraries exist in the `node` space that would be
-ashame to not use in your next XQuery project.
+Use javascript in your XQuery scripts and services or test your new javascript npm module with XQuery! Additionally, with the 
+prevlelance of node.js in resent years. Algorithms and libraries exist in the `node` space that would be a
+shame to not use in your next XQuery project.
 
 ## Installation
 Copy the ``xq-rhino-x.jar`` into your ``basex\lib`` directory 
@@ -28,10 +28,14 @@ This module is currently in Beta and should be used with caution. Especially in 
 writing of sensitive data. 
 
 ### Dependencies
+This module currently require [BaseX][0]
 
-## How 
-This module is not intended to help write better javascript, but leverage it. The most common use case will be to load
-and existing module, or set of modules and use their functionality in your solutions!
+### Contribute
+If you like what you see, or have any ideas to make it better, feel free to leave feedback, make a pull request, log an issue or simply question ask a question! 
+
+## Usage 
+This module is not intended to help write better javascript, but leverage it. The most common use case is loading
+existing modules and using their functionality in your XQuery and RESTXQ solutions!
 
 For example the following modules have been tested:
 * moment.js
@@ -39,16 +43,21 @@ For example the following modules have been tested:
 * mustache.js
 * browserfy.js
 
-The `xq-rhino` module provides a simple mapping between the rhino javascript engine and BaseX. 
+Let me know if any other module works for you!
+
+This module, `xq-rhino` provides a simple mapping between the Rhino `Java` javascript engine and BaseX. 
 It leverages the new `map` and `array` data types introduced in XQuery 3.1.
 
 ### Interop
 In order to provide a seamless scripting experience, all script objects are automatically
-mapped to XQuery objects when mapped to an XQuery variable. This allows for the use of
-the `?` operator for example:
+mapped to XQuery objects. This allows for the use of the `?` operator when querying objects or arrays:
 
 ```xquery
-let $obj := js:new('{first: "John", last: "Doe", name: function () { first + ' ' + last;}')
+let $obj := js:new('{
+  first: "John", 
+  last: "Doe", 
+  name: function () { first + ' ' + last;}
+')
 return
   'His name is ' || $obj?name() || '.'
 ```
@@ -80,9 +89,9 @@ return
 ```
 
 #### require
-The require implements the common js pattern as used in node.js. 
+The require method implements the common js pattern as used in `node.js`. 
 
-For example, if you wanted to load the mustache and your node modules 
+For example, if you wanted to load `mustache` and your node modules 
 are stored at `/home/user/modules` you would do the following: 
 
 ```xquery
@@ -92,12 +101,8 @@ return
   $mustache?render('Hello {{name}}!', map { 'name': 'world' })
 ```
 
-#### attach
-Attach, unlike require simply evaluates and attaches a script to the current script context. This 
-is milar to how a browser works and thus conflicts can arise.
-
 #### keys
-Returns all the keys in the script objects. Exactly how `map:keys` works. For example, the 
+Returns all the keys found in a script object. Operates exactly like `map:keys`. For example, the 
 following would return: `first` `last`
 
 ```xquery
@@ -108,15 +113,13 @@ return
 
 #### get
 
-Get allows for the retrieval of script properties.  
+Get allows an alternative means for the retrieval of script object properties.  
 
 ```xquery
 let $obj := js:new('{name: "world"}')
 return
   js:get($obj, 'name')
 ```
-
-Generally this method is not needed since the XQuery `?` can be used to accomplish the same:
 
 ```xquery
 let $obj := js:new('{name: "world"}')
@@ -150,7 +153,7 @@ return
 
 #### Moment.js
 ```xquery
-  let $require := js:require('/modules/dir/')
+  let $require := js:require('path/to/modules/dir/')
   let $moment := $require('Moment')
   return
    $moment()?add('-1','day')?fromNow(())
@@ -159,7 +162,7 @@ return
 #### Remarkable.js
 
 ```xquery
-  let $require := js:require(file:temp-dir())
+  let $require := js:require('path/to/modules/dir/')
   let $rm := $require('Remarkable')
   let $remarkable := js:new($rm)
   return 
