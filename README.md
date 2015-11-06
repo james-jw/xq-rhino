@@ -67,7 +67,9 @@ Additionlly, script objects and XQuery objects are interchangable, including
 function items. For example, its possible to pass XQuery functions into javascript functions and vice versa:
 
 ```xquery
-let $jsFunc := js:new('function (callback) { callback("Hey XQuery!"); }')
+let $jsFunc := js:new('function (callback) { 
+  callback("Hey XQuery!"); 
+}')
 return
   $jsFunc(trace(?))
 ```
@@ -177,9 +179,9 @@ And the equivalent with `xq-rhino`, including the defining of the modules direct
 ```xquery
   let $require := js:require('path/to/modules/dir/')
   let $rm := $require('Remarkable')
-  let $remarkable := js:new($rm)
+  let $md := js:new($rm)
   return 
-    $remarkable?render('# Remarkable rulezz! ', ()) => trace()
+    $md?render('# Remarkable rulezz! ', ()) => trace()
 ```
 
 ## Unit Tests
