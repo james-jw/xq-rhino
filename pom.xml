@@ -4,7 +4,7 @@
 
   <groupId>org.jw.basex.js.rhino</groupId>
   <artifactId>xq-rhino</artifactId>
-  <version>l.0</version>
+  <version>0.1</version>
   <packaging>jar</packaging>
 
   <name>xq-rhino</name>
