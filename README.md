@@ -45,10 +45,11 @@ For example the following modules have been tested:
 
 Let me know if any other module works for you!
 
-This module, `xq-rhino` provides a simple mapping between the Rhino `Java` javascript engine and BaseX. 
+### Interop
+
+The module, `xq-rhino` provides a simple mapping between the Rhino `Java` javascript engine and BaseX. 
 It leverages the new `map` and `array` data types introduced in XQuery 3.1.
 
-### Interop
 In order to provide a seamless scripting experience, all script objects are automatically
 mapped to XQuery objects. This allows for the use of the `?` operator when querying objects or arrays:
 
@@ -149,9 +150,11 @@ return
   $empty
 ```
 
-### Module Example
+### Other Examples
 
 #### Moment.js
+Here is a simple example of loading and using [Moment.js][4].
+
 ```xquery
   let $require := js:require('path/to/modules/dir/')
   let $moment := $require('Moment')
@@ -161,12 +164,24 @@ return
 
 #### Remarkable.js
 
+And another with [Remarkable][5]:
+
+Here is the example in the remarkable page:
+```javascript
+var Remarkable = require('remarkable');
+var md = new Remarkable();
+
+console.log(md.render('# Remarkable rulezz!'));
+```
+
+And the equivalent with `xq-rhino`, including the defining of the modules directory.
+
 ```xquery
   let $require := js:require('path/to/modules/dir/')
   let $rm := $require('Remarkable')
   let $remarkable := js:new($rm)
   return 
-    $remarkable?render('# Remarkable rulezz! ', ())
+    $remarkable?render('# Remarkable rulezz! ', ()) => trace()
 ```
 
 ## Unit Tests
@@ -179,3 +194,5 @@ If you like what you see here please star the repo and follow me on [github][1] 
 [1]: https://github.com/james-jw/xqpm
 [2]: https://www.linkedin.com/pub/james-wright/61/25a/101
 [3]: https://github.com/james-jw/xqpm
+[4]: http://momentjs.com/
+[5]: https://github.com/jonschlinkert/remarkable
