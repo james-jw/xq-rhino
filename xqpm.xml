@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- xqpm dependency file -->
+<config name="http://xq-rhino" abbrev="xq-rhino" version="1.0">
+  <dependencies>
+    <directory path="{{lib}}">
+      <dependency name="xq-rhino.jar" type="binary" 
+                  path="https://raw.githubusercontent.com/james-jw/xq-rhino/master/target/xq-rhino-0.1-Beta.jar" />
+    </directory>
+  </dependencies>
+</config>
